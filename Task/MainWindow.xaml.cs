@@ -33,24 +33,15 @@ namespace Task
             if (e.Data.GetDataPresent("Object"))
             {
                 e.Effects = DragDropEffects.Move;
-                // These Effects values are used in the drag source's
-                // GiveFeedback event handler to determine which cursor to display.
-                //if (e.KeyStates == DragDropKeyStates.ControlKey)
-                //{
-                //    e.Effects = DragDropEffects.Copy;
-                //}
-                //else
-                //{
-                //    e.Effects = DragDropEffects.Move;
-                //}
+               
             }
         }
 
         //функция Drop и удаления
         private void panel_Drop(object sender, DragEventArgs e)
         {
-            // If an element in the panel has already handled the drop,
-            // the panel should not also handle it.
+            // Если элемент на панели уже обработал drop, 
+            //панель не должна обрабатывать его.
             if (e.Handled == false)
             {
                 Panel _panel = (Panel)sender;
@@ -73,15 +64,14 @@ namespace Task
                             Ticket _ticket = new Ticket((Ticket)_element);
                             _parent.Children.Remove(_element);
                             _panel.Children.Remove(_element);
-                            // set the value to return to the DoDragDrop call
-                            //e.Effects = DragDropEffects.Copy;
+                            
                         }
 
                         else if (e.AllowedEffects.HasFlag(DragDropEffects.Move))
                         {
                             _parent.Children.Remove(_element);
                             _panel.Children.Add(_element);
-                            // set the value to return to the DoDragDrop call
+                            
                             e.Effects = DragDropEffects.Move;
                         }
                     }

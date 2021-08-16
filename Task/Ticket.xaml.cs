@@ -41,14 +41,10 @@ namespace Task
             base.OnMouseMove(e);
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                // Package the data.
                 DataObject data = new DataObject();
-                //data.SetData(DataFormats.StringFormat, circleUI.Fill.ToString());
-                //data.SetData("Double", circleUI.Height);
                 data.SetData("Object", this);
 
-                // Inititate the drag-and-drop operation.
-
+                // Инициализирует drag-and-drop.
                 DragDrop.DoDragDrop(this, data, DragDropEffects.Copy | DragDropEffects.Move);
             }
         }
@@ -57,8 +53,8 @@ namespace Task
         protected override void OnGiveFeedback(GiveFeedbackEventArgs e)
         {
             base.OnGiveFeedback(e);
-            // These Effects values are set in the drop target's
-            // DragOver event handler.
+            // Эти значения эффектов устанавливаются в обработчике 
+            //события DragOver целевого объекта перетаскивания.
             if (e.Effects.HasFlag(DragDropEffects.Move))
             {
                 Mouse.SetCursor(Cursors.Hand);
@@ -70,11 +66,11 @@ namespace Task
             e.Handled = true;
         }
 
+        //функция переписывания тикетов
         protected override void OnDrop(DragEventArgs e)
         {
             base.OnDrop(e);
 
-            // If the DataObject contains string data, extract it.
             if (e.Data.GetDataPresent(DataFormats.StringFormat))
             {
                 string dataString = (string)e.Data.GetData(DataFormats.StringFormat);
